@@ -1,0 +1,6 @@
+{
+  "name": "LBRCE Hostel Management System",
+  "description": "Hostel Management portal for Lakireddy Bali Reddy College of Engineering with role-based access for Admin (Wardens) and Students, outpass approval workflow, room allocations, complaints, and mess schedule.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

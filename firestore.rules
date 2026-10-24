@@ -1,0 +1,73 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Connection validation test document
+    match /test/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false;
+    }
+
+    // Rooms collection: public read for hostel vacancy board
+    match /rooms/{roomId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Outpasses collection
+    match /outpasses/{outpassId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false;
+    }
+
+    // Complaints collection
+    match /complaints/{complaintId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false;
+    }
+
+    // Notices collection: public bulletin board
+    match /notices/{noticeId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Mess Menu collection: public weekly dining schedule
+    match /messMenu/{dayId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Fees collection
+    match /fees/{feeId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Attendance collection
+    match /attendance/{attendanceId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Audit Logs collection: append-only activity trail
+    match /auditLogs/{logId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Hostel student or warden profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "rollNo": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "student"] },
+        "phone": { "type": "string" },
+        "avatar": { "type": "string" },
+        "designation": { "type": "string" },
+        "roomNo": { "type": "string" },
+        "block": { "type": "string" },
+        "branch": { "type": "string" },
+        "year": { "type": "string" },
+        "gender": { "type": "string" },
+        "parentName": { "type": "string" },
+        "parentPhone": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Hostel room with beds allocation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "roomNo": { "type": "string" },
+        "block": { "type": "string" },
+        "floor": { "type": "number" },
+        "capacity": { "type": "number" },
+        "occupied": { "type": "number" },
+        "type": { "type": "string", "enum": ["AC", "Non-AC"] },
+        "gender": { "type": "string", "enum": ["Boys", "Girls"] },
+        "beds": { "type": "array" }
+      },
+      "required": ["id", "roomNo", "block", "capacity"]
+    },
+    "Outpass": {
+      "title": "Outpass",
+      "description": "Student gate pass or leave request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "rollNo": { "type": "string" },
+        "roomNo": { "type": "string" },
+        "block": { "type": "string" },
+        "type": { "type": "string" },
+        "purpose": { "type": "string" },
+        "departureTime": { "type": "string" },
+        "expectedReturnTime": { "type": "string" },
+        "parentPhone": { "type": "string" },
+        "parentConsentReceived": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "appliedAt": { "type": "string" },
+        "approvedBy": { "type": "string" },
+        "approvedAt": { "type": "string" },
+        "rejectionReason": { "type": "string" },
+        "gatePassId": { "type": "string" }
+      },
+      "required": ["id", "studentName", "rollNo", "purpose", "status"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "Hostel grievance or maintenance ticket",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "rollNo": { "type": "string" },
+        "roomNo": { "type": "string" },
+        "block": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Emergency"] },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Resolved"] },
+        "createdAt": { "type": "string" },
+        "resolvedAt": { "type": "string" },
+        "adminRemarks": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "status"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "Official circular issued by Warden or Administration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "content": { "type": "string" },
+        "targetAudience": { "type": "string" },
+        "date": { "type": "string" },
+        "isUrgent": { "type": "boolean" },
+        "postedBy": { "type": "string" }
+      },
+      "required": ["id", "title", "content", "postedBy"]
+    },
+    "MessMenu": {
+      "title": "MessMenu",
+      "description": "Daily hostel dining schedule",
+      "type": "object",
+      "properties": {
+        "day": { "type": "string" },
+        "breakfast": { "type": "string" },
+        "lunch": { "type": "string" },
+        "snacks": { "type": "string" },
+        "dinner": { "type": "string" },
+        "specialNote": { "type": "string" }
+      },
+      "required": ["day", "breakfast", "lunch", "dinner"]
+    },
+    "Fee": {
+      "title": "Fee",
+      "description": "Student hostel & mess fee dues and receipts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "rollNo": { "type": "string" },
+        "studentName": { "type": "string" },
+        "roomNo": { "type": "string" },
+        "academicYear": { "type": "string" },
+        "hostelFee": { "type": "number" },
+        "messFee": { "type": "number" },
+        "totalFee": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "dueAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Paid", "Partial", "Overdue"] },
+        "lastPaymentDate": { "type": "string" },
+        "receiptNumber": { "type": "string" }
+      },
+      "required": ["id", "rollNo", "totalFee", "status"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Night roll call check-in record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "rollNo": { "type": "string" },
+        "studentName": { "type": "string" },
+        "roomNo": { "type": "string" },
+        "block": { "type": "string" },
+        "status": { "type": "string", "enum": ["Present", "Absent", "On Outpass", "Late"] },
+        "checkInTime": { "type": "string" },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "date", "rollNo", "status"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable activity and transaction log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "action": { "type": "string" },
+        "actorUid": { "type": "string" },
+        "actorName": { "type": "string" },
+        "role": { "type": "string" },
+        "details": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "action", "actorName"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles indexed by UID"
+    },
+    "/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Hostel room layouts and occupant allocations"
+    },
+    "/outpasses/{outpassId}": {
+      "schema": "Outpass",
+      "description": "Student gate passes and approvals"
+    },
+    "/complaints/{complaintId}": {
+      "schema": "Complaint",
+      "description": "Hostel grievance reports"
+    },
+    "/notices/{noticeId}": {
+      "schema": "Notice",
+      "description": "Hostel circulars and notices"
+    },
+    "/messMenu/{dayId}": {
+      "schema": "MessMenu",
+      "description": "Weekly dining menu"
+    },
+    "/fees/{feeId}": {
+      "schema": "Fee",
+      "description": "Student fee records"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": "Attendance",
+      "description": "Hostel night roll-call records"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Audit trail recording all user and admin transactions"
+    }
+  }
+}
